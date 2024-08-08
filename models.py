@@ -1,12 +1,13 @@
-from database import Base
+from database import Base,engine
 from sqlalchemy import Column, Integer, String, TIMESTAMP, Boolean, text
 
+def create_tables():
+    Base.metadata.create_all(engine)
 
-class Post(Base):
-    __tablename__ = "posts"
 
-    id = Column(Integer,primary_key=True,nullable=False)
-    title = Column(String,nullable=False)
-    content = Column(String,nullable=False)
-    published = Column(Boolean, server_default='TRUE')
-    created_at = Column(TIMESTAMP(timezone=True), server_default=text('now()'))
+class Person(Base):
+    __tablename__ = 'person'
+    id = Column(Integer,primary_key=True)
+    firstn = Column(String(40),nullable=False)
+    lastn = Column(String(40),nullable=False)
+    isMale = Column(Boolean)
